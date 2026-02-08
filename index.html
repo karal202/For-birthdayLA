@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thổi Nến Sinh Nhật 🎂</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #feca57;
+            --accent: #48dbfb;
+            --bg-dark: #1e1e2e;
+            --bg-light: #2d2d44;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(circle at center, #2d2d44 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        /* Particles/Stars Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.3;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 0.5; }
+            100% { opacity: 0.3; transform: translateY(-20px); }
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, #ff9ff3, #feca57);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .instruction {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            min-height: 28px;
+        }
+
+        /* --- CSS Cake --- */
+        .cake-stage {
+            height: 220px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
+        }
+
+        .cake-body {
+            width: 220px;
+            height: 100px;
+            background: linear-gradient(to right, #e67e91, #ff9eb5);
+            border-radius: 15px 15px 10px 10px;
+            position: relative;
+        }
+
+        .cake-body::before { /* Top coloring */
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: #ffbcd1;
+            border-radius: 50%;
+        }
+
+        .cake-body::after { /* Bottom shadow to look 3D */
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: #bf5b70;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* Icing Dripping */
+        .icing {
+            position: absolute;
+            top: -5px;
+            left: 5px;
+            width: 210px;
+            height: 40px;
+            background: #fff0f6;
+            border-radius: 15px;
+            z-index: 2;
+            mask-image: radial-gradient(circle at 15px 25px, transparent 10px, black 11px);
+            mask-size: 30px 40px;
+            mask-repeat: repeat-x;
+            mask-position: bottom;
+            -webkit-mask-image: radial-gradient(circle at 15px 25px, transparent 10px, black 11px);
+            -webkit-mask-size: 30px 40px;
+            -webkit-mask-repeat: repeat-x;
+            -webkit-mask-position: bottom;
+        }
+        
+        .icing-top {
+            position: absolute;
+            top: -12px;
+            left: 0;
+            width: 100%;
+            height: 25px;
+            background: #fff0f6;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .plate {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 15px;
+            background: #ddd;
+            border-radius: 50%;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            z-index: -2;
+        }
+
+        .candles {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            z-index: 5;
+        }
+
+        .candle {
+            width: 16px;
+            height: 60px;
+            background: repeating-linear-gradient(45deg, #feca57, #feca57 5px, #ff6b6b 5px, #ff6b6b 10px);
+            border-radius: 4px;
+            position: relative;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .wick {
+            width: 2px;
+            height: 10px;
+            background: #333;
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+
+        /* Hiệu ứng bấc đen khi tắt */
+        .wick.burnt {
+            background: #666;
+            height: 6px;
+            top: -6px;
+        }
+
+        .flame {
+            width: 18px;
+            height: 30px;
+            background: radial-gradient(ellipse at bottom, #ffeead 0%, #ff6b6b 80%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px #feca57;
+            animation: flicker 0.1s infinite alternate;
+            transform-origin: center bottom;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+
+        /* Hiệu ứng tắt lửa - QUAN TRỌNG */
+        .flame.blown {
+            opacity: 0 !important;
+            transform: translateX(-50%) scale(0.1) translateY(-20px);
+            box-shadow: none;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scaleY(1) rotate(-2deg); opacity: 0.9; }
+            100% { transform: translateX(-50%) scaleY(1.1) rotate(2deg); opacity: 1; }
+        }
+
+        /* Khói nhẹ khi tắt nến */
+        .smoke {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 0;
+            background: rgba(150, 150, 150, 0.5);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.8s ease-out;
+        }
+
+        .smoke.active {
+            height: 30px;
+            opacity: 0.6;
+            transform: translateX(-50%) translateY(-20px);
+        }
+
+        /* --- Controls --- */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .mic-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Outfit', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mic-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.5);
+        }
+        
+        .mic-btn:hover::before {
+            opacity: 1;
+        }
+
+        .mic-btn:active {
+            transform: translateY(1px);
+        }
+
+        .mic-visualizer {
+            width: 250px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            position: relative;
+        }
+
+        .mic-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #48dbfb, #feca57, #ff6b6b);
+            transition: width 0.05s linear;
+            border-radius: 10px;
+        }
+
+        /* --- Celebration & Overlay --- */
+        .celebration-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            width: 100%;
+        }
+
+        .celebration-container.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+
+        .big-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 5em;
+            background: linear-gradient(to bottom, #fff, #feca57);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(255, 107, 107, 0.5);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .sub-text {
+            font-size: 1.2em;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+        }
+
+        .restart-btn {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 30px;
+            color: #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        
+        .restart-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px; height: 10px;
+            background: #f00;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(720deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .big-text { font-size: 3em; }
+            .cake-body { width: 180px; }
+            .icing { width: 170px; mask-size: 25px 30px; -webkit-mask-size: 25px 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <div class="container" id="mainCard">
+        <h1>Thổi Nến nào!</h1>
+        <p class="instruction" id="instruction">Nhấn nút bên dưới và thổi vào micro để tắt nến 🕯️</p>
+
+        <div class="cake-stage">
+            <div class="cake-body">
+                <div class="icing-top"></div>
+                <div class="icing"></div>
+                <!-- Candles -->
+                <div class="candles">
+                    <div class="candle">
+                        <div class="wick" id="wick1"></div>
+                        <div class="flame" id="flame1"></div>
+                        <div class="smoke" id="smoke1"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="wick" id="wick2"></div>
+                        <div class="flame" id="flame2"></div>
+                        <div class="smoke" id="smoke2"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="wick" id="wick3"></div>
+                        <div class="flame" id="flame3"></div>
+                        <div class="smoke" id="smoke3"></div>
+                    </div>
+                </div>
+                <!-- Plate -->
+                <div class="plate"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="mic-btn" id="startBtn">
+                <span id="btnIcon">🎙️</span> 
+                <span id="btnText">Bật Micro</span>
+            </button>
+            <div class="mic-visualizer" id="visualizer">
+                <div class="mic-bar" id="micBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Screen -->
+    <div class="celebration-container" id="celebration">
+        <div class="big-text">
+            HAPPY<br>BIRTHDAY! 🎉
+        </div>
+        <div class="sub-text">
+            Chúc bạn tuổi mới rực rỡ, hạnh phúc và thành công! ✨
+        </div>
+        <button class="restart-btn" onclick="location.reload()">
+            🎂 Thổi nến lại
+        </button>
+    </div>
+
+    <script>
+    const BLOW_THRESHOLD_SINGLE   =  30;   // thổi nhẹ → có thể tắt 1-2 cây
+    const BLOW_THRESHOLD_ALL      =  50;   // thổi mạnh → tắt hết 3 cây ngay
+
+
+    const startBtn    = document.getElementById('startBtn');
+    const btnText     = document.getElementById('btnText');
+    const btnIcon     = document.getElementById('btnIcon');
+    const instruction = document.getElementById('instruction');
+    const visualizer  = document.getElementById('visualizer');
+    const micBar      = document.getElementById('micBar');
+    const mainCard    = document.getElementById('mainCard');
+    const celebration = document.getElementById('celebration');
+
+    const flames = [
+        document.getElementById('flame1'),
+        document.getElementById('flame2'),
+        document.getElementById('flame3')
+    ];
+
+    const wicks = [
+        document.getElementById('wick1'),
+        document.getElementById('wick2'),
+        document.getElementById('wick3')
+    ];
+
+    const smokes = [
+        document.getElementById('smoke1'),
+        document.getElementById('smoke2'),
+        document.getElementById('smoke3')
+    ];
+
+    let audioContext;
+    let analyser;
+    let microphone;
+    let dataArray;
+    let isListening = false;
+    let candlesBlown = 0;
+
+    startBtn.addEventListener('click', toggleMic);
+
+    async function toggleMic() {
+        if (isListening) return;
+
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioContext.createAnalyser();
+            microphone = audioContext.createMediaStreamSource(stream);
+            
+            analyser.fftSize = 256;
+            const bufferLength = analyser.frequencyBinCount;
+            dataArray = new Uint8Array(bufferLength);
+            
+            microphone.connect(analyser);
+
+            isListening = true;
+            btnText.textContent = "Đang lắng nghe...";
+            btnIcon.textContent = "👂";
+            startBtn.style.background = "linear-gradient(135deg, #48dbfb, #0abde3)";
+            
+            visualizer.style.opacity = "1";
+            instruction.textContent = "Thổi mạnh một phát để tắt hết nến nhé! 💨🔥";
+
+            detectSound();
+        } catch (err) {
+            console.error(err);
+            alert("Cần cho phép micro để chơi nhé!");
+        }
+    }
+
+    function detectSound() {
+        if (!isListening) return;
+
+        requestAnimationFrame(detectSound);
+        analyser.getByteFrequencyData(dataArray);
+
+        let sum = 0;
+        for (let i = 0; i < dataArray.length; i++) {
+            sum += dataArray[i];
+        }
+        const average = sum / dataArray.length;
+
+        // Visualizer bar
+        const visualPercent = Math.min(100, average * 1.2);
+        micBar.style.width = `${visualPercent}%`;
+
+        // Lửa lay động theo gió
+        const intensity = Math.min(12, average / 9);
+        flames.forEach(flame => {
+            if (!flame.classList.contains('blown')) {
+                if (average > 8) {
+                    const x = (Math.random() - 0.5) * intensity * 2.5;
+                    const scaleY = 1 - (average / 280);
+                    const rotate = (Math.random() - 0.5) * average / 1.8;
+                    
+                    flame.style.transform = `translateX(calc(-50% + ${x}px)) scaleY(${scaleY}) rotate(${rotate}deg)`;
+                    flame.style.opacity = 0.75 + Math.random() * 0.25;
+                } else {
+                    flame.style.transform = "translateX(-50%)";
+                    flame.style.opacity = 0.92;
+                }
+            }
+        });
+
+        // ───────────────────────────────────────────────
+        // PHÁT HIỆN THỔI → TẮT NẾN
+        // ───────────────────────────────────────────────
+        if (average > BLOW_THRESHOLD_SINGLE && candlesBlown < 3) {
+            // Đếm nến còn cháy
+            const stillLit = flames.filter(f => !f.classList.contains('blown')).length;
+
+            if (stillLit > 0) {
+                let toBlowCount = 1; // mặc định tắt 1 cây
+
+                // Thổi siêu mạnh → tắt hết luôn
+                if (average > BLOW_THRESHOLD_ALL) {
+                    toBlowCount = stillLit; // tắt hết số còn lại
+                }
+                // Hoặc thổi khá mạnh → có thể tắt 2 cây
+                else if (average > 68 && stillLit >= 2) {
+                    toBlowCount = 2;
+                }
+
+                // Lấy danh sách index nến còn cháy
+                const litIndices = [];
+                flames.forEach((f, i) => {
+                    if (!f.classList.contains('blown')) litIndices.push(i);
+                });
+
+                // Xáo trộn nhẹ để tắt ngẫu nhiên
+                for (let i = litIndices.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [litIndices[i], litIndices[j]] = [litIndices[j], litIndices[i]];
+                }
+
+                // Thực hiện tắt
+                for (let k = 0; k < toBlowCount && k < litIndices.length; k++) {
+                    const idx = litIndices[k];
+
+                    flames[idx].classList.add('blown');
+                    wicks[idx].classList.add('burnt');
+
+                    smokes[idx].classList.add('active');
+                    setTimeout(() => smokes[idx].classList.remove('active'), 1200);
+
+                    candlesBlown++;
+                }
+
+                // Nếu đã tắt hết → mừng sinh nhật
+                if (candlesBlown >= 3) {
+                    setTimeout(startCelebration, 300);
+                }
+            }
+        }
+    }
+
+    function startCelebration() {
+        isListening = false;
+        if (audioContext) {
+            setTimeout(() => audioContext.suspend(), 600);
+        }
+
+        document.querySelector('h1').style.opacity = "0";
+        document.querySelector('.controls').style.opacity = "0";
+        instruction.style.opacity = "0";
+        
+        mainCard.style.background = "transparent";
+        mainCard.style.boxShadow = "none";
+        mainCard.style.border = "none";
+        mainCard.style.backdropFilter = "none";
+        mainCard.style.transition = "all 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+
+        mainCard.style.transform = "translateY(220px) scale(0.92)";
+
+        setTimeout(() => {
+            celebration.classList.add('show');
+            celebration.style.top = "38%";
+            loopConfetti();
+        }, 700);
+    }
+
+    // Confetti ────────────────────────────────────────
+    function loopConfetti() {
+        const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#00d2d3', '#9b59b6'];
+        setInterval(() => {
+            for (let i = 0; i < 6; i++) createConfettiPiece(colors);
+        }, 280);
+
+        // burst đầu
+        for (let i = 0; i < 60; i++) createConfettiPiece(colors);
+    }
+
+    function createConfettiPiece(colors) {
+        const conf = document.createElement('div');
+        conf.classList.add('confetti');
+        conf.style.left = Math.random() * 100 + 'vw';
+        conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        const dur = Math.random() * 3.2 + 2.3;
+        conf.style.animationDuration = dur + 's';
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), dur * 1000 + 200);
+    }
+    </script>
+</body>
+</html>
