@@ -186,12 +186,12 @@
 
         .candles {
             position: absolute;
-            top: -45px;
+            top: -42px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 30px;
-            z-index: 5;
+            z-index: 1;
         }
 
         .candle {
@@ -418,7 +418,7 @@
 
     <div class="container" id="mainCard">
         <h1>Thổi Nến nào!</h1>
-        <p class="instruction" id="instruction">Nhấn nút bên dưới và thổi vào micro để tắt nến 🕯️</p>
+        <p class="instruction" id="instruction">Nhấn nút bên dưới và thổi vào điện thoại để tắt nến 🕯️</p>
 
         <div class="cake-stage">
             <div class="cake-body">
@@ -581,37 +581,18 @@
         // PHÁT HIỆN THỔI → TẮT NẾN
         // ───────────────────────────────────────────────
         if (average > BLOW_THRESHOLD_SINGLE && candlesBlown < 3) {
-            // Đếm nến còn cháy
+            // Tắt hết 3 cây luôn
             const stillLit = flames.filter(f => !f.classList.contains('blown')).length;
 
             if (stillLit > 0) {
-                let toBlowCount = 1; // mặc định tắt 1 cây
-
-                // Thổi siêu mạnh → tắt hết luôn
-                if (average > BLOW_THRESHOLD_ALL) {
-                    toBlowCount = stillLit; // tắt hết số còn lại
-                }
-                // Hoặc thổi khá mạnh → có thể tắt 2 cây
-                else if (average > 68 && stillLit >= 2) {
-                    toBlowCount = 2;
-                }
-
                 // Lấy danh sách index nến còn cháy
                 const litIndices = [];
                 flames.forEach((f, i) => {
                     if (!f.classList.contains('blown')) litIndices.push(i);
                 });
 
-                // Xáo trộn nhẹ để tắt ngẫu nhiên
-                for (let i = litIndices.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [litIndices[i], litIndices[j]] = [litIndices[j], litIndices[i]];
-                }
-
-                // Thực hiện tắt
-                for (let k = 0; k < toBlowCount && k < litIndices.length; k++) {
-                    const idx = litIndices[k];
-
+                // Thực hiện tắt hết
+                litIndices.forEach(idx => {
                     flames[idx].classList.add('blown');
                     wicks[idx].classList.add('burnt');
 
@@ -619,7 +600,7 @@
                     setTimeout(() => smokes[idx].classList.remove('active'), 1200);
 
                     candlesBlown++;
-                }
+                });
 
                 // Nếu đã tắt hết → mừng sinh nhật
                 if (candlesBlown >= 3) {
@@ -669,6 +650,7 @@
         const conf = document.createElement('div');
         conf.classList.add('confetti');
         conf.style.left = Math.random() * 100 + 'vw';
+        conf.style.top = '-10px';
         conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         const dur = Math.random() * 3.2 + 2.3;
         conf.style.animationDuration = dur + 's';
