@@ -186,7 +186,7 @@
 
         .candles {
             position: absolute;
-            top: -42px;
+            top: -58px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -418,7 +418,7 @@
 
     <div class="container" id="mainCard">
         <h1>Thổi Nến nào!</h1>
-        <p class="instruction" id="instruction">Nhấn nút bên dưới và thổi vào điện thoại để tắt nến 🕯️</p>
+        <p class="instruction" id="instruction">Nhấn nút bên dưới và thổi vào điện thoại để tắt nến</p>
 
         <div class="cake-stage">
             <div class="cake-body">
@@ -461,10 +461,10 @@
     <!-- Celebration Screen -->
     <div class="celebration-container" id="celebration">
         <div class="big-text">
-            HAPPY<br>BIRTHDAY! 🎉
+            HAPPY<br>BIRTHDAY LA 🎉
         </div>
         <div class="sub-text">
-            Chúc bạn tuổi mới rực rỡ, hạnh phúc và thành công! ✨
+            Chúc em iu của anh tuổi mới rực rỡ, hạnh phúc và thành công!<br>Mãi yêu em ❤️
         </div>
         <button class="restart-btn" onclick="location.reload()">
             🎂 Thổi nến lại
@@ -577,9 +577,6 @@
             }
         });
 
-        // ───────────────────────────────────────────────
-        // PHÁT HIỆN THỔI → TẮT NẾN
-        // ───────────────────────────────────────────────
         if (average > BLOW_THRESHOLD_SINGLE && candlesBlown < 3) {
             // Tắt hết 3 cây luôn
             const stillLit = flames.filter(f => !f.classList.contains('blown')).length;
